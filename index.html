@@ -7,561 +7,509 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 
-* {
-
-  box-sizing: border-box;
-
-  margin: 0;
-
-  padding: 0;
-
-}
+* { box-sizing:border-box; margin:0; padding:0; }
 
 :root {
 
-  --bg: #080d18;
+  --bg:#080d18;
 
-  --panel: #111a2b;
+  --panel:#111a2b;
 
-  --panel2: #17243a;
+  --panel2:#17243a;
 
-  --text: #f3f6fc;
+  --text:#f3f6fc;
 
-  --muted: #a8b4c8;
+  --muted:#a8b4c8;
 
-  --accent: #62d6c5;
+  --accent:#62d6c5;
 
-  --accent2: #4a9fff;
-
-  --border: rgba(255,255,255,.1);
+  --border:rgba(255,255,255,.1);
 
 }
 
 body {
 
-  background: var(--bg);
+  background:var(--bg);
 
-  color: var(--text);
+  color:var(--text);
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
 
-  min-height: 100vh;
+  min-height:100vh;
 
 }
 
 header {
 
-  padding: 24px 7%;
+  padding:24px 7%;
 
-  display: flex;
+  display:flex;
 
-  justify-content: space-between;
+  justify-content:space-between;
 
-  align-items: center;
+  align-items:center;
 
-  border-bottom: 1px solid var(--border);
+  border-bottom:1px solid var(--border);
 
-  background: rgba(8,13,24,.95);
+  background:rgba(8,13,24,.95);
 
 }
 
 .logo {
 
-  font-size: 22px;
+  font-size:22px;
 
-  font-weight: 900;
+  font-weight:900;
 
-  letter-spacing: 2px;
-
-}
-
-.logo span {
-
-  color: var(--accent);
+  letter-spacing:2px;
 
 }
+
+.logo span { color:var(--accent); }
 
 .score {
 
-  background: var(--panel);
+  background:var(--panel);
 
-  border: 1px solid var(--border);
+  border:1px solid var(--border);
 
-  border-radius: 30px;
+  border-radius:30px;
 
-  padding: 10px 17px;
+  padding:10px 17px;
 
-  font-weight: bold;
+  font-weight:bold;
 
 }
 
 main {
 
-  width: min(1100px, 90%);
+  width:min(1100px,90%);
 
-  margin: 0 auto;
+  margin:0 auto;
 
-  padding: 45px 0 70px;
-
-}
-
-.screen {
-
-  display: none;
+  padding:45px 0 70px;
 
 }
 
-.screen.active {
+.screen { display:none; }
 
-  display: block;
-
-}
+.screen.active { display:block; }
 
 .eyebrow {
 
-  color: var(--accent);
+  color:var(--accent);
 
-  text-transform: uppercase;
+  text-transform:uppercase;
 
-  letter-spacing: 3px;
+  letter-spacing:3px;
 
-  font-size: 12px;
+  font-size:12px;
 
-  font-weight: bold;
+  font-weight:bold;
 
-  margin-bottom: 15px;
+  margin-bottom:15px;
 
 }
 
 h1 {
 
-  font-size: clamp(38px, 7vw, 70px);
+  font-size:clamp(38px,7vw,70px);
 
-  line-height: 1.05;
+  line-height:1.05;
 
-  margin-bottom: 20px;
-
-}
-
-h1 span {
-
-  color: var(--accent);
+  margin-bottom:20px;
 
 }
 
-h2 {
+h1 span { color:var(--accent); }
 
-  font-size: 30px;
+h2 { font-size:30px; margin-bottom:14px; }
 
-  margin-bottom: 14px;
-
-}
-
-h3 {
-
-  font-size: 23px;
-
-  margin-bottom: 12px;
-
-}
+h3 { font-size:23px; margin-bottom:12px; }
 
 p {
 
-  color: var(--muted);
+  color:var(--muted);
 
-  line-height: 1.7;
+  line-height:1.7;
 
 }
 
 .hero {
 
-  padding: 65px 0;
+  padding:65px 0;
 
-  max-width: 750px;
+  max-width:750px;
 
 }
 
 .hero p {
 
-  font-size: 18px;
+  font-size:18px;
 
-  max-width: 620px;
+  max-width:620px;
 
-  margin-bottom: 30px;
+  margin-bottom:30px;
 
 }
 
 .button {
 
-  display: inline-block;
+  display:inline-block;
 
-  border: none;
+  border:none;
 
-  border-radius: 9px;
+  border-radius:9px;
 
-  padding: 14px 22px;
+  padding:14px 22px;
 
-  background: var(--accent);
+  background:var(--accent);
 
-  color: #07151a;
+  color:#07151a;
 
-  font-size: 14px;
+  font-size:14px;
 
-  font-weight: 900;
+  font-weight:900;
 
-  letter-spacing: .5px;
+  letter-spacing:.5px;
 
-  cursor: pointer;
+  cursor:pointer;
 
-  transition: .2s;
+  transition:.2s;
 
 }
 
 .button:hover {
 
-  transform: translateY(-2px);
+  transform:translateY(-2px);
 
-  filter: brightness(1.08);
+  filter:brightness(1.08);
 
 }
 
 .button.secondary {
 
-  background: var(--panel2);
+  background:var(--panel2);
 
-  color: var(--text);
+  color:var(--text);
 
-  border: 1px solid var(--border);
-
-}
-
-.section-heading {
-
-  margin-bottom: 25px;
+  border:1px solid var(--border);
 
 }
 
-.section-heading p {
+.section-heading { margin-bottom:25px; }
 
-  max-width: 650px;
-
-}
+.section-heading p { max-width:650px; }
 
 .map-panel {
 
-  background: var(--panel);
+  background:var(--panel);
 
-  border: 1px solid var(--border);
+  border:1px solid var(--border);
 
-  padding: 12px;
+  padding:12px;
 
-  border-radius: 16px;
+  border-radius:16px;
 
-  margin-top: 25px;
+  margin-top:25px;
 
 }
 
-#countryMap,
+#countryMap,#placesMap {
 
-#placesMap {
+  width:100%;
 
-  width: 100%;
+  height:490px;
 
-  height: 490px;
+  border-radius:10px;
 
-  border-radius: 10px;
-
-  background: #17243a;
+  background:#17243a;
 
 }
 
 .map-note {
 
-  padding: 12px 8px 3px;
+  padding:12px 8px 3px;
 
-  font-size: 13px;
+  font-size:13px;
 
-  color: var(--muted);
+  color:var(--muted);
 
 }
 
 .country-buttons {
 
-  display: grid;
+  display:grid;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns:repeat(4,1fr);
 
-  gap: 12px;
+  gap:12px;
 
-  margin-top: 20px;
+  margin-top:20px;
 
 }
 
 .country-button {
 
-  padding: 17px 10px;
+  padding:17px 10px;
 
-  background: var(--panel);
+  background:var(--panel);
 
-  color: var(--text);
+  color:var(--text);
 
-  border: 1px solid var(--border);
+  border:1px solid var(--border);
 
-  border-radius: 10px;
+  border-radius:10px;
 
-  cursor: pointer;
+  cursor:pointer;
 
-  font-weight: bold;
+  font-weight:bold;
 
-  transition: .2s;
+  transition:.2s;
 
 }
 
 .country-button:hover {
 
-  border-color: var(--accent);
+  border-color:var(--accent);
 
-  background: var(--panel2);
+  background:var(--panel2);
 
 }
 
 .quiz-panel {
 
-  background: var(--panel);
+  background:var(--panel);
 
-  border: 1px solid var(--border);
+  border:1px solid var(--border);
 
-  padding: 28px;
+  padding:28px;
 
-  border-radius: 15px;
+  border-radius:15px;
 
-  margin-top: 25px;
+  margin-top:25px;
 
-  max-width: 750px;
+  max-width:750px;
 
 }
 
 .question {
 
-  font-size: 21px;
+  font-size:21px;
 
-  line-height: 1.5;
+  line-height:1.5;
 
-  margin: 20px 0;
+  margin:20px 0;
 
-  color: var(--text);
+  color:var(--text);
 
-  font-weight: bold;
+  font-weight:bold;
 
 }
 
 .answers {
 
-  display: grid;
+  display:grid;
 
-  gap: 10px;
+  gap:10px;
 
-  margin: 20px 0;
+  margin:20px 0;
 
 }
 
 .answer-button {
 
-  text-align: left;
+  text-align:left;
 
-  padding: 15px;
+  padding:15px;
 
-  background: var(--panel2);
+  background:var(--panel2);
 
-  border: 1px solid var(--border);
+  border:1px solid var(--border);
 
-  border-radius: 9px;
+  border-radius:9px;
 
-  color: var(--text);
+  color:var(--text);
 
-  cursor: pointer;
+  cursor:pointer;
 
-  font-size: 15px;
+  font-size:15px;
 
-  transition: .2s;
+  transition:.2s;
 
 }
 
 .answer-button:hover:not(:disabled) {
 
-  border-color: var(--accent);
+  border-color:var(--accent);
 
 }
 
 .answer-button:disabled {
 
-  cursor: default;
+  cursor:default;
 
-  opacity: .85;
+  opacity:.85;
 
 }
 
 .answer-button.correct {
 
-  border-color: #49d69b;
+  border-color:#49d69b;
 
-  background: rgba(73,214,155,.15);
+  background:rgba(73,214,155,.15);
 
 }
 
 .answer-button.wrong {
 
-  border-color: #ff7777;
+  border-color:#ff7777;
 
-  background: rgba(255,119,119,.12);
+  background:rgba(255,119,119,.12);
 
 }
 
 .feedback {
 
-  min-height: 26px;
+  min-height:26px;
 
-  margin: 12px 0 18px;
+  margin:12px 0 18px;
 
-  font-weight: bold;
-
-}
-
-.feedback.good {
-
-  color: #49d69b;
+  font-weight:bold;
 
 }
 
-.feedback.bad {
+.feedback.good { color:#49d69b; }
 
-  color: #ff9292;
-
-}
-
-.place-card {
-
-  background: var(--panel);
-
-  border: 1px solid var(--border);
-
-  border-radius: 16px;
-
-  overflow: hidden;
-
-  margin-top: 25px;
-
-}
-
-.place-image {
-
-  width: 100%;
-
-  height: 330px;
-
-  object-fit: cover;
-
-  display: block;
-
-  background: var(--panel2);
-
-}
-
-.place-content {
-
-  padding: 28px;
-
-}
-
-.place-country {
-
-  color: var(--accent);
-
-  text-transform: uppercase;
-
-  letter-spacing: 2px;
-
-  font-size: 11px;
-
-  font-weight: bold;
-
-  margin-bottom: 10px;
-
-}
-
-.fact-box {
-
-  background: var(--panel2);
-
-  border-left: 3px solid var(--accent);
-
-  padding: 17px;
-
-  margin: 22px 0;
-
-  border-radius: 5px;
-
-}
-
-.fact-box strong {
-
-  display: block;
-
-  margin-bottom: 7px;
-
-  color: var(--accent);
-
-}
-
-.place-question {
-
-  font-size: 19px;
-
-  font-weight: bold;
-
-  margin: 25px 0 15px;
-
-}
-
-.place-placeholder {
-
-  padding: 30px;
-
-  text-align: center;
-
-  color: var(--muted);
-
-}
+.feedback.bad { color:#ff9292; }
 
 .stats {
 
-  display: flex;
+  display:flex;
 
-  gap: 12px;
+  gap:12px;
 
-  flex-wrap: wrap;
+  flex-wrap:wrap;
 
-  margin-top: 18px;
+  margin-top:18px;
 
 }
 
 .stat {
 
-  background: var(--panel2);
+  background:var(--panel2);
 
-  padding: 10px 14px;
+  padding:10px 14px;
 
-  border-radius: 8px;
+  border-radius:8px;
 
-  color: var(--muted);
+  color:var(--muted);
 
-  font-size: 13px;
+  font-size:13px;
 
 }
 
-.stat strong {
+.stat strong { color:var(--text); }
 
-  color: var(--text);
+.place-card {
+
+  background:var(--panel);
+
+  border:1px solid var(--border);
+
+  border-radius:16px;
+
+  overflow:hidden;
+
+  margin-top:25px;
+
+}
+
+.place-image {
+
+  width:100%;
+
+  height:380px;
+
+  object-fit:cover;
+
+  display:block;
+
+  background:var(--panel2);
+
+}
+
+.image-caption {
+
+  padding:8px 20px;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  background:#0d1524;
+
+}
+
+.place-content { padding:28px; }
+
+.place-country {
+
+  color:var(--accent);
+
+  text-transform:uppercase;
+
+  letter-spacing:2px;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  margin-bottom:10px;
+
+}
+
+.fact-box {
+
+  background:var(--panel2);
+
+  border-left:3px solid var(--accent);
+
+  padding:17px;
+
+  margin:22px 0;
+
+  border-radius:5px;
+
+}
+
+.fact-box strong {
+
+  display:block;
+
+  margin-bottom:7px;
+
+  color:var(--accent);
+
+}
+
+.place-question {
+
+  font-size:19px;
+
+  font-weight:bold;
+
+  margin:25px 0 15px;
+
+}
+
+.place-placeholder {
+
+  padding:30px;
+
+  text-align:center;
+
+  color:var(--muted);
 
 }
 
@@ -569,91 +517,47 @@ p {
 
 .leaflet-popup-tip {
 
-  background: #111a2b;
+  background:#111a2b;
 
-  color: white;
-
-}
-
-.leaflet-popup-content {
-
-  font-weight: bold;
+  color:white;
 
 }
+
+.leaflet-popup-content { font-weight:bold; }
 
 footer {
 
-  text-align: center;
+  text-align:center;
 
-  color: #728097;
+  color:#728097;
 
-  padding: 25px;
+  padding:25px;
 
-  border-top: 1px solid var(--border);
+  border-top:1px solid var(--border);
 
-  font-size: 12px;
+  font-size:12px;
 
 }
 
-@media (max-width: 700px) {
+@media(max-width:700px) {
 
-  header {
+  header { padding:18px 5%; }
 
-    padding: 18px 5%;
+  .logo { font-size:17px; }
 
-  }
+  main { width:92%; padding-top:30px; }
 
-  .logo {
+  .hero { padding:40px 0; }
 
-    font-size: 17px;
+  .country-buttons { grid-template-columns:repeat(2,1fr); }
 
-  }
+  #countryMap,#placesMap { height:390px; }
 
-  main {
+  .place-image { height:250px; }
 
-    width: 92%;
+  .place-content { padding:20px; }
 
-    padding-top: 30px;
-
-  }
-
-  .hero {
-
-    padding: 40px 0;
-
-  }
-
-  .country-buttons {
-
-    grid-template-columns: repeat(2, 1fr);
-
-  }
-
-  #countryMap,
-
-  #placesMap {
-
-    height: 390px;
-
-  }
-
-  .place-image {
-
-    height: 230px;
-
-  }
-
-  .place-content {
-
-    padding: 20px;
-
-  }
-
-  .quiz-panel {
-
-    padding: 20px;
-
-  }
+  .quiz-panel { padding:20px; }
 
 }
 </style>
@@ -664,41 +568,36 @@ footer {
 <div class="score">⭐ <span id="score">0</span> points</div>
 </header>
 <main>
-<!-- HOME -->
 <section id="home" class="screen active">
 <div class="hero">
 <div class="eyebrow">Your interactive UK adventure</div>
 <h1>Explore.<br><span>Discover.</span><br>Learn.</h1>
 <p>
 
-        Discover the United Kingdom, explore its four countries,
+      Discover the United Kingdom, explore its four countries,
 
-        visit famous places and test your knowledge with interactive quizzes.
+      visit famous places and test your knowledge with interactive quizzes.
 </p>
 <button class="button" onclick="showScreen('countries')">
 
-        START EXPLORING →
+      START EXPLORING →
 </button>
 </div>
 </section>
-<!-- COUNTRY MAP -->
 <section id="countries" class="screen">
 <div class="section-heading">
 <div class="eyebrow">Step 01 — Choose your destination</div>
 <h2>Explore the United Kingdom</h2>
 <p>
 
-        The United Kingdom is made up of four countries.
+      The United Kingdom is made up of four countries.
 
-        Select one on the map or use the buttons below to begin your journey.
+      Select one on the map or use the buttons below to begin your journey.
 </p>
 </div>
 <div class="map-panel">
 <div id="countryMap"></div>
-<div class="map-note">
-
-        Click on a country to discover it.
-</div>
+<div class="map-note">Click on a country to discover it.</div>
 </div>
 <div class="country-buttons">
 <button class="country-button" onclick="selectCountry('England')">🏴 England</button>
@@ -707,7 +606,6 @@ footer {
 <button class="country-button" onclick="selectCountry('Northern Ireland')">Northern Ireland</button>
 </div>
 </section>
-<!-- COUNTRY QUIZ -->
 <section id="quiz" class="screen">
 <div class="eyebrow">Step 02 — Test your knowledge</div>
 <h2 id="countryTitle">Discover a country</h2>
@@ -719,37 +617,33 @@ footer {
 <div class="feedback" id="countryFeedback"></div>
 <button id="continueButton" class="button" style="display:none"
 
-        onclick="openPlaces()">
+      onclick="openPlaces()">
 
-        EXPLORE THIS COUNTRY →
+      EXPLORE THIS COUNTRY →
 </button>
 </div>
 <br>
 <button class="button secondary" onclick="showScreen('countries')">
 
-      ← Back to the map
+    ← Back to the map
 </button>
 </section>
-<!-- PLACES MAP -->
 <section id="places" class="screen">
 <div class="eyebrow">Step 03 — Your exploration</div>
 <h2 id="placesTitle">Explore the country</h2>
 <p>
 
-      Choose a place on the map. Discover interesting facts and answer
+    Choose a place on the map. Discover interesting facts and answer
 
-      questions to earn points. You can visit the places in any order.
+    questions to earn points. You can visit the places in any order.
 </p>
 <div class="stats">
-<div class="stat">Places discovered: <strong id="discovered">0</strong></div>
+<div class="stat">Places discovered: <strong id="discovered">0 / 8</strong></div>
 <div class="stat">Country: <strong id="currentCountry">—</strong></div>
 </div>
 <div class="map-panel">
 <div id="placesMap"></div>
-<div class="map-note">
-
-        Select one of the markers to discover a place.
-</div>
+<div class="map-note">Select one of the markers to discover a place.</div>
 </div>
 <div id="placeInfo" class="place-card">
 <div class="place-placeholder">
@@ -760,408 +654,539 @@ footer {
 <br>
 <button class="button secondary" onclick="showScreen('countries')">
 
-      ← Choose another country
+    ← Choose another country
 </button>
 </section>
 </main>
-<footer>
-
-  ALL AROUND UK — Explore the United Kingdom
-</footer>
+<footer>ALL AROUND UK — Explore the United Kingdom</footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 
-/* --------------------------------
-
-   DATA
-
---------------------------------- */
+/* COUNTRY QUESTIONS */
 
 const countryData = {
 
   "England": {
 
-    intro: "England is the largest country in the United Kingdom. It is famous for its history, culture and cities.",
+    intro:"England is the largest country in the United Kingdom. It is famous for its history, culture and cities.",
 
-    question: "What is the capital city of England?",
+    question:"What is the capital city of England?",
 
-    answers: ["Manchester", "London", "Liverpool", "Birmingham"],
+    answers:["Manchester","London","Liverpool","Birmingham"],
 
-    correct: 1
+    correct:1
 
   },
 
   "Scotland": {
 
-    intro: "Scotland is known for its beautiful landscapes, castles, lochs and rich traditions.",
+    intro:"Scotland is known for its beautiful landscapes, castles, lochs and rich traditions.",
 
-    question: "What is the capital city of Scotland?",
+    question:"What is the capital city of Scotland?",
 
-    answers: ["Glasgow", "Aberdeen", "Edinburgh", "Inverness"],
+    answers:["Glasgow","Aberdeen","Edinburgh","Inverness"],
 
-    correct: 2
+    correct:2
 
   },
 
   "Wales": {
 
-    intro: "Wales is famous for its mountains, castles, coastline and Welsh language.",
+    intro:"Wales is famous for its mountains, castles, coastline and Welsh language.",
 
-    question: "What is the capital city of Wales?",
+    question:"What is the capital city of Wales?",
 
-    answers: ["Swansea", "Cardiff", "Newport", "Bangor"],
+    answers:["Swansea","Cardiff","Newport","Bangor"],
 
-    correct: 1
+    correct:1
 
   },
 
   "Northern Ireland": {
 
-    intro: "Northern Ireland is known for its dramatic coastline, historic cities and green landscapes.",
+    intro:"Northern Ireland is known for its dramatic coastline, historic cities and green landscapes.",
 
-    question: "What is the capital city of Northern Ireland?",
+    question:"What is the capital city of Northern Ireland?",
 
-    answers: ["Derry", "Lisburn", "Belfast", "Armagh"],
+    answers:["Derry","Lisburn","Belfast","Armagh"],
 
-    correct: 2
+    correct:2
 
   }
 
 };
 
+/* PLACES: 8 DESTINATIONS PER COUNTRY */
+
 const places = {
 
-  "England": [
+"England":[
 
-    {
+{
 
-      name: "London",
+name:"London",lat:51.5072,lng:-0.1276,wiki:"London",
 
-      lat: 51.5072,
+description:"London is the capital of England and one of the world's most famous cities. It is home to historic landmarks, museums and a diverse cultural scene.",
 
-      lng: -0.1276,
+fact:"Big Ben is actually the name of the Great Bell inside the Elizabeth Tower.",
 
-      wiki: "London",
+question:"Which famous river flows through London?",
 
-      description: "London is the capital of England and one of the world's most famous cities. It is home to historic landmarks, museums and a diverse cultural scene.",
+answers:["River Severn","River Thames","River Clyde","River Avon"],correct:1
 
-      fact: "Big Ben is actually the name of the Great Bell inside the Elizabeth Tower.",
+},
 
-      question: "Which famous river flows through London?",
+{
 
-      answers: ["River Severn", "River Thames", "River Clyde", "River Avon"],
+name:"Stonehenge",lat:51.1789,lng:-1.8262,wiki:"Stonehenge",
 
-      correct: 1
+description:"Stonehenge is a prehistoric monument in Wiltshire, made up of a circle of enormous standing stones.",
 
-    },
+fact:"Some of its stones were transported from places more than 200 kilometres away.",
 
-    {
+question:"What kind of monument is Stonehenge?",
 
-      name: "Stonehenge",
+answers:["A medieval castle","A prehistoric stone circle","A Roman theatre","A royal palace"],correct:1
 
-      lat: 51.1789,
+},
 
-      lng: -1.8262,
+{
 
-      wiki: "Stonehenge",
+name:"Oxford",lat:51.7520,lng:-1.2577,wiki:"Oxford",
 
-      description: "Stonehenge is a prehistoric monument in Wiltshire, made up of a circle of enormous standing stones.",
+description:"Oxford is a historic university city. Its university is made up of many colleges spread throughout the city.",
 
-      fact: "Some of its stones were transported from places more than 200 kilometres away.",
+fact:"The University of Oxford is one of the oldest universities in the world.",
 
-      question: "What kind of monument is Stonehenge?",
+question:"What is Oxford especially famous for?",
 
-      answers: ["A medieval castle", "A prehistoric stone circle", "A Roman theatre", "A royal palace"],
+answers:["Its university","Its beaches","Its volcanoes","Its desert"],correct:0
 
-      correct: 1
+},
 
-    },
+{
 
-    {
+name:"Liverpool",lat:53.4084,lng:-2.9916,wiki:"Liverpool",
 
-      name: "Oxford",
+description:"Liverpool is a major port city in north-west England, famous for its music, maritime history and football culture.",
 
-      lat: 51.7520,
+fact:"Liverpool is the birthplace of The Beatles.",
 
-      lng: -1.2577,
+question:"Which famous band came from Liverpool?",
 
-      wiki: "Oxford",
+answers:["Queen","The Beatles","ABBA","The Rolling Stones"],correct:1
 
-      description: "Oxford is a historic university city. Its university is made up of many colleges spread throughout the city.",
+},
 
-      fact: "The University of Oxford is one of the oldest universities in the world.",
+{
 
-      question: "What is Oxford especially famous for?",
+name:"Bath",lat:51.3811,lng:-2.3590,wiki:"Bath, Somerset",
 
-      answers: ["Its university", "Its beaches", "Its volcanoes", "Its desert"],
+description:"Bath is a beautiful historic city in south-west England, famous for its Roman remains and elegant Georgian architecture.",
 
-      correct: 0
+fact:"The Roman Baths were built around natural hot springs.",
 
-    },
+question:"Which ancient civilisation gave Bath its famous baths?",
 
-    {
+answers:["The Greeks","The Romans","The Vikings","The Egyptians"],correct:1
 
-      name: "Liverpool",
+},
 
-      lat: 53.4084,
+{
 
-      lng: -2.9916,
+name:"Cambridge",lat:52.2053,lng:0.1218,wiki:"Cambridge",
 
-      wiki: "Liverpool",
+description:"Cambridge is a historic university city known for its colleges, riverside scenery and academic traditions.",
 
-      description: "Liverpool is a major port city in north-west England, famous for its music, maritime history and football culture.",
+fact:"The River Cam flows through the city, where visitors can enjoy punting.",
 
-      fact: "Liverpool is the birthplace of The Beatles.",
+question:"Which river flows through Cambridge?",
 
-      question: "Which famous band came from Liverpool?",
+answers:["River Cam","River Thames","River Clyde","River Severn"],correct:0
 
-      answers: ["Queen", "The Beatles", "ABBA", "The Rolling Stones"],
+},
 
-      correct: 1
+{
 
-    }
+name:"York",lat:53.9590,lng:-1.0815,wiki:"York",
 
-  ],
+description:"York is a historic city in northern England, known for its medieval streets, ancient walls and magnificent cathedral.",
 
-  "Scotland": [
+fact:"York Minster is one of the largest Gothic cathedrals in northern Europe.",
 
-    {
+question:"What is the name of York's famous cathedral?",
 
-      name: "Edinburgh Castle",
+answers:["Canterbury Cathedral","York Minster","St Paul's Cathedral","Durham Cathedral"],correct:1
 
-      lat: 55.9486,
+},
 
-      lng: -3.1999,
+{
 
-      wiki: "Edinburgh Castle",
+name:"Windsor Castle",lat:51.4839,lng:-0.6044,wiki:"Windsor Castle",
 
-      description: "Edinburgh Castle stands on top of Castle Rock and dominates the Scottish capital's skyline.",
+description:"Windsor Castle is a royal residence near London and one of the most famous castles in the United Kingdom.",
 
-      fact: "The castle has been involved in many important events in Scottish history.",
+fact:"It is widely recognised as the oldest and largest occupied castle in the world.",
 
-      question: "On what kind of natural feature is the castle built?",
+question:"What is Windsor Castle associated with?",
 
-      answers: ["A beach", "A volcanic rock", "An island", "A forest"],
+answers:["The British royal family","The Roman army","The Beatles","The University of Oxford"],correct:0
 
-      correct: 1
+}
 
-    },
+],
 
-    {
+"Scotland":[
 
-      name: "Loch Ness",
+{
 
-      lat: 57.3229,
+name:"Edinburgh Castle",lat:55.9486,lng:-3.1999,wiki:"Edinburgh Castle",
 
-      lng: -4.4244,
+description:"Edinburgh Castle stands on top of Castle Rock and dominates the Scottish capital's skyline.",
 
-      wiki: "Loch Ness",
+fact:"The castle has been involved in many important events in Scottish history.",
 
-      description: "Loch Ness is a large freshwater lake in the Scottish Highlands, surrounded by beautiful landscapes.",
+question:"On what kind of natural feature is the castle built?",
 
-      fact: "Loch Ness is famous around the world for the legend of the Loch Ness Monster, nicknamed Nessie.",
+answers:["A beach","A volcanic rock","An island","A forest"],correct:1
 
-      question: "What is the legendary creature of Loch Ness called?",
+},
 
-      answers: ["Nessie", "Bessie", "Molly", "Scotty"],
+{
 
-      correct: 0
+name:"Loch Ness",lat:57.3229,lng:-4.4244,wiki:"Loch Ness",
 
-    },
+description:"Loch Ness is a large freshwater lake in the Scottish Highlands, surrounded by beautiful landscapes.",
 
-    {
+fact:"Loch Ness is famous around the world for the legend of the Loch Ness Monster, nicknamed Nessie.",
 
-      name: "Glasgow",
+question:"What is the legendary creature of Loch Ness called?",
 
-      lat: 55.8642,
+answers:["Nessie","Bessie","Molly","Scotty"],correct:0
 
-      lng: -4.2518,
+},
 
-      wiki: "Glasgow",
+{
 
-      description: "Glasgow is Scotland's largest city, known for its architecture, museums, music and friendly atmosphere.",
+name:"Glasgow",lat:55.8642,lng:-4.2518,wiki:"Glasgow",
 
-      fact: "Glasgow has a long history of shipbuilding on the River Clyde.",
+description:"Glasgow is Scotland's largest city, known for its architecture, museums, music and friendly atmosphere.",
 
-      question: "Which river is closely associated with Glasgow?",
+fact:"Glasgow has a long history of shipbuilding on the River Clyde.",
 
-      answers: ["River Thames", "River Clyde", "River Trent", "River Tyne"],
+question:"Which river is closely associated with Glasgow?",
 
-      correct: 1
+answers:["River Thames","River Clyde","River Trent","River Tyne"],correct:1
 
-    },
+},
 
-    {
+{
 
-      name: "Isle of Skye",
+name:"Isle of Skye",lat:57.2736,lng:-6.2155,wiki:"Isle of Skye",
 
-      lat: 57.2736,
+description:"The Isle of Skye is an island off Scotland's west coast, famous for dramatic mountains and spectacular scenery.",
 
-      lng: -6.2155,
+fact:"The Old Man of Storr is one of the island's best-known natural landmarks.",
 
-      wiki: "Isle of Skye",
+question:"What is the Isle of Skye particularly famous for?",
 
-      description: "The Isle of Skye is an island off Scotland's west coast, famous for dramatic mountains and spectacular scenery.",
+answers:["Its skyscrapers","Its desert","Its dramatic landscapes","Its tropical forests"],correct:2
 
-      fact: "The Old Man of Storr is one of the island's best-known natural landmarks.",
+},
 
-      question: "What is the Isle of Skye particularly famous for?",
+{
 
-      answers: ["Its skyscrapers", "Its desert", "Its dramatic landscapes", "Its tropical forests"],
+name:"Stirling Castle",lat:56.1239,lng:-3.9450,wiki:"Stirling Castle",
 
-      correct: 2
+description:"Stirling Castle is a historic fortress overlooking the city of Stirling. It played an important role in Scottish history.",
 
-    }
+fact:"Several Scottish kings and queens were crowned at Stirling Castle.",
 
-  ],
+question:"Which country is Stirling Castle in?",
 
-  "Wales": [
+answers:["England","Wales","Scotland","Northern Ireland"],correct:2
 
-    {
+},
 
-      name: "Cardiff",
+{
 
-      lat: 51.4816,
+name:"Glenfinnan Viaduct",lat:56.8766,lng:-5.4310,wiki:"Glenfinnan Viaduct",
 
-      lng: -3.1791,
+description:"Glenfinnan Viaduct is a famous railway bridge in the Scottish Highlands, surrounded by spectacular scenery.",
 
-      wiki: "Cardiff",
+fact:"The viaduct became internationally famous after appearing in the Harry Potter films.",
 
-      description: "Cardiff is the capital of Wales. It combines historic buildings, modern attractions and a lively waterfront.",
+question:"What travels across the Glenfinnan Viaduct?",
 
-      fact: "Cardiff Castle is located right in the centre of the city.",
+answers:["A railway train","A cable car","A road bus","A boat"],correct:0
 
-      question: "What is Cardiff?",
+},
 
-      answers: ["The capital of Wales", "The capital of Scotland", "A Scottish island", "A city in Ireland"],
+{
 
-      correct: 0
+name:"St Andrews",lat:56.3398,lng:-2.7967,wiki:"St Andrews",
 
-    },
+description:"St Andrews is a coastal town in eastern Scotland, known for its university, historic ruins and golf traditions.",
 
-    {
+fact:"St Andrews is often described as the home of golf.",
 
-      name: "Conwy Castle",
+question:"Which sport is St Andrews especially famous for?",
 
-      lat: 53.2807,
+answers:["Rugby","Golf","Cricket","Ice hockey"],correct:1
 
-      lng: -3.8250,
+},
 
-      wiki: "Conwy Castle",
+{
 
-      description: "Conwy Castle is a medieval fortress in north Wales, built by Edward I in the late 13th century.",
+name:"Cairngorms",lat:57.1000,lng:-3.6700,wiki:"Cairngorms National Park",
 
-      fact: "Its impressive walls and towers are part of a UNESCO World Heritage Site.",
+description:"Cairngorms National Park is a vast natural area in the Scottish Highlands, with mountains, forests and wildlife.",
 
-      question: "What type of building is Conwy Castle?",
+fact:"It is the largest national park in the United Kingdom.",
 
-      answers: ["A modern stadium", "A medieval fortress", "A university", "A lighthouse"],
+question:"What type of place is the Cairngorms?",
 
-      correct: 1
+answers:["A national park","A capital city","A harbour","A university"],correct:0
 
-    },
+}
 
-    {
+],
 
-      name: "Snowdonia",
+"Wales":[
 
-      lat: 53.0685,
+{
 
-      lng: -4.0763,
+name:"Cardiff",lat:51.4816,lng:-3.1791,wiki:"Cardiff",
 
-      wiki: "Eryri National Park",
+description:"Cardiff is the capital of Wales. It combines historic buildings, modern attractions and a lively waterfront.",
 
-      description: "Eryri, also known as Snowdonia, is a national park in north-west Wales, famous for its mountains and outdoor activities.",
+fact:"Cardiff Castle is located right in the centre of the city.",
 
-      fact: "Yr Wyddfa, also known as Snowdon, is the highest mountain in Wales.",
+question:"What is Cardiff?",
 
-      question: "What is the highest mountain in Wales?",
+answers:["The capital of Wales","The capital of Scotland","A Scottish island","A city in Ireland"],correct:0
 
-      answers: ["Ben Nevis", "Scafell Pike", "Yr Wyddfa", "Helvellyn"],
+},
 
-      correct: 2
+{
 
-    }
+name:"Conwy Castle",lat:53.2807,lng:-3.8250,wiki:"Conwy Castle",
 
-  ],
+description:"Conwy Castle is a medieval fortress in north Wales, built by Edward I in the late 13th century.",
 
-  "Northern Ireland": [
+fact:"Its impressive walls and towers are part of a UNESCO World Heritage Site.",
 
-    {
+question:"What type of building is Conwy Castle?",
 
-      name: "Belfast",
+answers:["A modern stadium","A medieval fortress","A university","A lighthouse"],correct:1
 
-      lat: 54.5973,
+},
 
-      lng: -5.9301,
+{
 
-      wiki: "Belfast",
+name:"Snowdonia",lat:53.0685,lng:-4.0763,wiki:"Eryri National Park",
 
-      description: "Belfast is the capital and largest city of Northern Ireland, with a rich industrial and cultural history.",
+description:"Eryri, also known as Snowdonia, is a national park in north-west Wales, famous for its mountains and outdoor activities.",
 
-      fact: "The Titanic was built in Belfast at the Harland and Wolff shipyard.",
+fact:"Yr Wyddfa, also known as Snowdon, is the highest mountain in Wales.",
 
-      question: "Which famous ship was built in Belfast?",
+question:"What is the highest mountain in Wales?",
 
-      answers: ["Queen Mary", "Titanic", "Mayflower", "Cutty Sark"],
+answers:["Ben Nevis","Scafell Pike","Yr Wyddfa","Helvellyn"],correct:2
 
-      correct: 1
+},
 
-    },
+{
 
-    {
+name:"Tenby",lat:51.6728,lng:-4.7038,wiki:"Tenby",
 
-      name: "Giant's Causeway",
+description:"Tenby is a colourful seaside town in south-west Wales, known for its sandy beaches, harbour and historic town walls.",
 
-      lat: 55.2408,
+fact:"Tenby's harbour is famous for its colourful buildings overlooking the sea.",
 
-      lng: -6.5116,
+question:"What kind of destination is Tenby?",
 
-      wiki: "Giant's Causeway",
+answers:["A seaside town","A mountain village","An industrial city","A desert settlement"],correct:0
 
-      description: "The Giant's Causeway is a spectacular coastal area made up of thousands of interlocking basalt columns.",
+},
 
-      fact: "According to an Irish legend, the columns were built by a giant named Finn McCool.",
+{
 
-      question: "What are the columns of the Giant's Causeway made of?",
+name:"Portmeirion",lat:52.9130,lng:-4.0980,wiki:"Portmeirion",
 
-      answers: ["Marble", "Basalt", "Sandstone", "Granite"],
+description:"Portmeirion is a unique village in north Wales, famous for its colourful Italian-style architecture and gardens.",
 
-      correct: 1
+fact:"The village was designed by architect Clough Williams-Ellis.",
 
-    },
+question:"Which architectural style inspired Portmeirion?",
 
-    {
+answers:["Japanese","Italian","Gothic","Egyptian"],correct:1
 
-      name: "Derry",
+},
 
-      lat: 54.9966,
+{
 
-      lng: -7.3086,
+name:"Brecon Beacons",lat:51.8830,lng:-3.4360,wiki:"Brecon Beacons",
 
-      wiki: "Derry",
+description:"The Brecon Beacons are a beautiful mountain range in southern Wales, known for walking trails and open landscapes.",
 
-      description: "Derry, also known as Londonderry, is a historic city in Northern Ireland, famous for its complete city walls.",
+fact:"The area is now part of Bannau Brycheiniog National Park.",
 
-      fact: "Derry's historic walls date back to the early 17th century.",
+question:"What is this area especially popular for?",
 
-      question: "What is Derry particularly famous for?",
+answers:["Ski resorts","Walking and hiking","Desert racing","Deep-sea diving"],correct:1
 
-      answers: ["Its city walls", "Its pyramids", "Its canals", "Its royal palace"],
+},
 
-      correct: 0
+{
 
-    }
+name:"Pembrokeshire",lat:51.6740,lng:-4.9080,wiki:"Pembrokeshire Coast National Park",
 
-  ]
+description:"Pembrokeshire Coast National Park follows a spectacular coastline in south-west Wales, with cliffs, beaches and coastal paths.",
+
+fact:"It is the only UK national park designated primarily for its coastline.",
+
+question:"What is Pembrokeshire especially known for?",
+
+answers:["Its coastline","Its skyscrapers","Its volcanoes","Its desert"],correct:0
+
+},
+
+{
+
+name:"Caernarfon Castle",lat:53.1390,lng:-4.2760,wiki:"Caernarfon Castle",
+
+description:"Caernarfon Castle is a powerful medieval fortress in north-west Wales, built by Edward I.",
+
+fact:"Its distinctive polygonal towers make it one of Wales's most recognisable castles.",
+
+question:"In which part of the UK is Caernarfon Castle?",
+
+answers:["Scotland","England","Wales","Northern Ireland"],correct:2
+
+}
+
+],
+
+"Northern Ireland":[
+
+{
+
+name:"Belfast",lat:54.5973,lng:-5.9301,wiki:"Belfast",
+
+description:"Belfast is the capital and largest city of Northern Ireland, with a rich industrial and cultural history.",
+
+fact:"The Titanic was built in Belfast at the Harland and Wolff shipyard.",
+
+question:"Which famous ship was built in Belfast?",
+
+answers:["Queen Mary","Titanic","Mayflower","Cutty Sark"],correct:1
+
+},
+
+{
+
+name:"Giant's Causeway",lat:55.2408,lng:-6.5116,wiki:"Giant's Causeway",
+
+description:"The Giant's Causeway is a spectacular coastal area made up of thousands of interlocking basalt columns.",
+
+fact:"According to an Irish legend, the columns were built by a giant named Finn McCool.",
+
+question:"What are the columns of the Giant's Causeway made of?",
+
+answers:["Marble","Basalt","Sandstone","Granite"],correct:1
+
+},
+
+{
+
+name:"Derry",lat:54.9966,lng:-7.3086,wiki:"Derry",
+
+description:"Derry, also known as Londonderry, is a historic city in Northern Ireland, famous for its complete city walls.",
+
+fact:"Derry's historic walls date back to the early 17th century.",
+
+question:"What is Derry particularly famous for?",
+
+answers:["Its city walls","Its pyramids","Its canals","Its royal palace"],correct:0
+
+},
+
+{
+
+name:"Carrick-a-Rede",lat:55.2370,lng:-6.3310,wiki:"Carrick-a-Rede Rope Bridge",
+
+description:"Carrick-a-Rede is a famous rope bridge connecting the mainland to a small island along Northern Ireland's north coast.",
+
+fact:"The bridge was originally used by salmon fishermen.",
+
+question:"What connects the mainland to the island?",
+
+answers:["A tunnel","A rope bridge","A railway","A ferry terminal"],correct:1
+
+},
+
+{
+
+name:"Dunluce Castle",lat:55.2108,lng:-6.5790,wiki:"Dunluce Castle",
+
+description:"Dunluce Castle is a dramatic medieval ruin perched on a rocky coastal outcrop in County Antrim.",
+
+fact:"Parts of the castle stand very close to steep cliffs overlooking the sea.",
+
+question:"Where is Dunluce Castle located?",
+
+answers:["On a coastal cliff","In the middle of a lake","On a mountain summit","In central Belfast"],correct:0
+
+},
+
+{
+
+name:"Dark Hedges",lat:55.1340,lng:-6.3800,wiki:"Dark Hedges",
+
+description:"The Dark Hedges is a beautiful avenue of beech trees in County Antrim, creating a distinctive natural tunnel.",
+
+fact:"The avenue appeared in the television series Game of Thrones.",
+
+question:"Which type of trees line the Dark Hedges?",
+
+answers:["Palm trees","Beech trees","Olive trees","Pine trees"],correct:1
+
+},
+
+{
+
+name:"Marble Arch Caves",lat:54.2560,lng:-7.8170,wiki:"Marble Arch Caves",
+
+description:"The Marble Arch Caves are an impressive underground cave system in County Fermanagh, with rivers and rock formations.",
+
+fact:"The caves were formed naturally over millions of years by water moving through limestone.",
+
+question:"What type of natural feature are the Marble Arch Caves?",
+
+answers:["A cave system","A volcano","A glacier","A coral reef"],correct:0
+
+},
+
+{
+
+name:"Titanic Belfast",lat:54.6080,lng:-5.9090,wiki:"Titanic Belfast",
+
+description:"Titanic Belfast is a visitor attraction in the city where the famous ship was designed and built.",
+
+fact:"The building stands close to the historic shipbuilding site where Titanic was constructed.",
+
+question:"Which ship is the attraction dedicated to?",
+
+answers:["Queen Elizabeth","Titanic","Mayflower","Cutty Sark"],correct:1
+
+}
+
+]
 
 };
 
-/* --------------------------------
-
-   GAME STATE
-
---------------------------------- */
+/* GAME STATE */
 
 let score = 0;
 
@@ -1173,15 +1198,17 @@ let placesMap = null;
 
 let geoLayer = null;
 
-const answeredPlaces = new Set();
-
 let countryAnswered = false;
 
-/* --------------------------------
+const answeredPlaces = new Set();
 
-   GENERAL FUNCTIONS
+function placeKey(place) {
 
---------------------------------- */
+  return selectedCountry + ":" + place.name;
+
+}
+
+/* GENERAL FUNCTIONS */
 
 function showScreen(id) {
 
@@ -1199,9 +1226,9 @@ function showScreen(id) {
 
     if (id === "places" && placesMap) placesMap.invalidateSize();
 
-  }, 150);
+  },150);
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({top:0,behavior:"smooth"});
 
 }
 
@@ -1217,7 +1244,7 @@ function updateDiscovered() {
 
   const total = places[selectedCountry].filter(place =>
 
-    answeredPlaces.has(place.name)
+    answeredPlaces.has(placeKey(place))
 
   ).length;
 
@@ -1227,11 +1254,7 @@ function updateDiscovered() {
 
 }
 
-/* --------------------------------
-
-   MAIN UK MAP
-
---------------------------------- */
+/* MAIN UK MAP */
 
 function createCountryMap() {
 
@@ -1243,11 +1266,11 @@ function createCountryMap() {
 
   }
 
-  countryMap = L.map("countryMap").setView([54.5, -3], 5.5);
+  countryMap = L.map("countryMap").setView([54.5,-3],5.5);
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
 
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 
   }).addTo(countryMap);
 
@@ -1255,11 +1278,7 @@ function createCountryMap() {
 
     .then(response => {
 
-      if (!response.ok) {
-
-        throw new Error("GeoJSON file could not be loaded.");
-
-      }
+      if (!response.ok) throw new Error("GeoJSON file could not be loaded.");
 
       return response.json();
 
@@ -1267,57 +1286,47 @@ function createCountryMap() {
 
     .then(data => {
 
-      geoLayer = L.geoJSON(data, {
+      geoLayer = L.geoJSON(data,{
 
-        style: feature => ({
+        style:() => ({
 
-          color: "#62d6c5",
+          color:"#62d6c5",
 
-          weight: 2,
+          weight:2,
 
-          fillColor: "#4a9fff",
+          fillColor:"#4a9fff",
 
-          fillOpacity: 0.25
+          fillOpacity:.25
 
         }),
 
-        onEachFeature: (feature, layer) => {
+        onEachFeature:(feature,layer) => {
 
           const name = feature.properties.shapeName;
 
-          layer.bindTooltip(name, {
+          layer.bindTooltip(name,{
 
-            permanent: false,
+            permanent:false,
 
-            direction: "center"
-
-          });
-
-          layer.on("mouseover", () => {
-
-            layer.setStyle({
-
-              fillOpacity: 0.55,
-
-              weight: 3
-
-            });
+            direction:"center"
 
           });
 
-          layer.on("mouseout", () => {
+          layer.on("mouseover",() => {
+
+            layer.setStyle({fillOpacity:.55,weight:3});
+
+          });
+
+          layer.on("mouseout",() => {
 
             geoLayer.resetStyle(layer);
 
           });
 
-          layer.on("click", () => {
+          layer.on("click",() => {
 
-            if (countryData[name]) {
-
-              selectCountry(name);
-
-            }
+            if (countryData[name]) selectCountry(name);
 
           });
 
@@ -1325,11 +1334,7 @@ function createCountryMap() {
 
       }).addTo(countryMap);
 
-      countryMap.fitBounds(geoLayer.getBounds(), {
-
-        padding: [15, 15]
-
-      });
+      countryMap.fitBounds(geoLayer.getBounds(),{padding:[15,15]});
 
     })
 
@@ -1349,11 +1354,7 @@ function createCountryMap() {
 
 }
 
-/* --------------------------------
-
-   COUNTRY QUIZ
-
---------------------------------- */
+/* COUNTRY QUIZ */
 
 function selectCountry(name) {
 
@@ -1381,7 +1382,7 @@ function selectCountry(name) {
 
   answersBox.innerHTML = "";
 
-  data.answers.forEach((answer, index) => {
+  data.answers.forEach((answer,index) => {
 
     const button = document.createElement("button");
 
@@ -1411,19 +1412,13 @@ function answerCountry(index) {
 
   const feedback = document.getElementById("countryFeedback");
 
-  buttons.forEach((button, i) => {
+  buttons.forEach((button,i) => {
 
     button.disabled = true;
 
-    if (i === data.correct) {
+    if (i === data.correct) button.classList.add("correct");
 
-      button.classList.add("correct");
-
-    } else if (i === index) {
-
-      button.classList.add("wrong");
-
-    }
+    else if (i === index) button.classList.add("wrong");
 
   });
 
@@ -1437,9 +1432,9 @@ function answerCountry(index) {
 
   } else {
 
-    feedback.textContent =
+    feedback.textContent = "Not quite! The correct answer is " +
 
-      "Not quite! The correct answer is " + data.answers[data.correct] + ".";
+      data.answers[data.correct] + ".";
 
     feedback.className = "feedback bad";
 
@@ -1449,17 +1444,11 @@ function answerCountry(index) {
 
 }
 
-/* --------------------------------
-
-   COUNTRY PLACES MAP
-
---------------------------------- */
+/* PLACES MAP */
 
 function openPlaces() {
 
-  document.getElementById("placesTitle").textContent =
-
-    "Explore " + selectedCountry;
+  document.getElementById("placesTitle").textContent = "Explore " + selectedCountry;
 
   document.getElementById("currentCountry").textContent = selectedCountry;
 
@@ -1493,9 +1482,9 @@ function createPlacesMap() {
 
   placesMap = L.map("placesMap");
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
 
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 
   }).addTo(placesMap);
 
@@ -1503,15 +1492,11 @@ function createPlacesMap() {
 
   destinations.forEach(place => {
 
-    const marker = L.marker([place.lat, place.lng]).addTo(placesMap);
+    const marker = L.marker([place.lat,place.lng]).addTo(placesMap);
 
     marker.bindPopup(place.name);
 
-    marker.on("click", () => {
-
-      showPlace(place);
-
-    });
+    marker.on("click",() => showPlace(place));
 
     markers.push(marker);
 
@@ -1519,33 +1504,33 @@ function createPlacesMap() {
 
   const group = L.featureGroup(markers);
 
-  placesMap.fitBounds(group.getBounds(), {
+  placesMap.fitBounds(group.getBounds(),{
 
-    padding: [35, 35],
+    padding:[35,35],
 
-    maxZoom: 9
+    maxZoom:9
 
   });
 
-  setTimeout(() => placesMap.invalidateSize(), 200);
+  setTimeout(() => placesMap.invalidateSize(),200);
 
 }
 
-/* --------------------------------
+/* HIGHER QUALITY WIKIPEDIA IMAGES */
 
-   PLACE DETAILS AND PHOTOS
-
---------------------------------- */
-
-function loadPlacePhoto(place, imageElement) {
+function loadPlacePhoto(place,imageElement,captionElement) {
 
   const title = encodeURIComponent(place.wiki);
 
-  fetch("https://en.wikipedia.org/api/rest_v1/page/summary/" + title)
+  const api =
+
+    "https://en.wikipedia.org/api/rest_v1/page/summary/" + title;
+
+  fetch(api)
 
     .then(response => {
 
-      if (!response.ok) throw new Error("No image available");
+      if (!response.ok) throw new Error("Image unavailable");
 
       return response.json();
 
@@ -1553,15 +1538,39 @@ function loadPlacePhoto(place, imageElement) {
 
     .then(data => {
 
-      if (data.thumbnail && data.thumbnail.source) {
+      /*
 
-        imageElement.src = data.thumbnail.source;
+        Prefer the original image.
+
+        Use the thumbnail only if the original is unavailable.
+
+      */
+
+      const imageUrl =
+
+        (data.originalimage && data.originalimage.source) ||
+
+        (data.thumbnail && data.thumbnail.source);
+
+      if (imageUrl) {
+
+        imageElement.src = imageUrl;
 
         imageElement.style.display = "block";
 
+        imageElement.alt = "Photograph of " + place.name;
+
+        captionElement.textContent =
+
+          "Image: Wikipedia / Wikimedia Commons";
+
       } else {
 
-        imageElement.alt = "Photo not available for " + place.name;
+        imageElement.style.display = "none";
+
+        captionElement.textContent =
+
+          "No photograph is currently available for this place.";
 
       }
 
@@ -1569,15 +1578,21 @@ function loadPlacePhoto(place, imageElement) {
 
     .catch(() => {
 
-      imageElement.alt = "Photo not available for " + place.name;
+      imageElement.style.display = "none";
+
+      captionElement.textContent =
+
+        "Photograph could not be loaded. The place information is still available.";
 
     });
 
 }
 
+/* PLACE DETAILS AND QUIZ */
+
 function showPlace(place) {
 
-  const alreadyAnswered = answeredPlaces.has(place.name);
+  const alreadyAnswered = answeredPlaces.has(placeKey(place));
 
   const card = document.getElementById("placeInfo");
 
@@ -1590,8 +1605,16 @@ function showPlace(place) {
 
       src=""
 
-      alt="Photo of ${place.name}"
+      alt="Photograph of ${place.name}"
+
+      loading="lazy"
+
+      decoding="async"
 >
+<div class="image-caption" id="imageCaption">
+
+      Loading photograph...
+</div>
 <div class="place-content">
 <div class="place-country">${selectedCountry}</div>
 <h2>${place.name}</h2>
@@ -1609,7 +1632,9 @@ function showPlace(place) {
 
   const photo = document.getElementById("placePhoto");
 
-  loadPlacePhoto(place, photo);
+  const caption = document.getElementById("imageCaption");
+
+  loadPlacePhoto(place,photo,caption);
 
   const answersBox = document.getElementById("placeAnswers");
 
@@ -1621,7 +1646,7 @@ function showPlace(place) {
 
     feedback.className = "feedback good";
 
-    place.answers.forEach((answer, index) => {
+    place.answers.forEach((answer,index) => {
 
       const button = document.createElement("button");
 
@@ -1631,67 +1656,57 @@ function showPlace(place) {
 
       button.disabled = true;
 
-      if (index === place.correct) {
-
-        button.classList.add("correct");
-
-      }
+      if (index === place.correct) button.classList.add("correct");
 
       answersBox.appendChild(button);
 
     });
 
-    return;
+  } else {
+
+    place.answers.forEach((answer,index) => {
+
+      const button = document.createElement("button");
+
+      button.className = "answer-button";
+
+      button.textContent = answer;
+
+      button.onclick = () => answerPlace(place,index);
+
+      answersBox.appendChild(button);
+
+    });
 
   }
 
-  place.answers.forEach((answer, index) => {
-
-    const button = document.createElement("button");
-
-    button.className = "answer-button";
-
-    button.textContent = answer;
-
-    button.onclick = () => answerPlace(place, index);
-
-    answersBox.appendChild(button);
-
-  });
-
   card.scrollIntoView({
 
-    behavior: "smooth",
+    behavior:"smooth",
 
-    block: "start"
+    block:"start"
 
   });
 
 }
 
-function answerPlace(place, selectedIndex) {
+function answerPlace(place,selectedIndex) {
 
-  if (answeredPlaces.has(place.name)) return;
+  if (answeredPlaces.has(placeKey(place))) return;
 
-  answeredPlaces.add(place.name);
+  answeredPlaces.add(placeKey(place));
 
   const buttons = document.querySelectorAll("#placeAnswers button");
 
   const feedback = document.getElementById("placeFeedback");
 
-  buttons.forEach((button, index) => {
+  buttons.forEach((button,index) => {
 
     button.disabled = true;
 
-    if (index === place.correct) {
+    if (index === place.correct) button.classList.add("correct");
 
-      button.classList.add("correct");
-
-    } else if (index === selectedIndex) {
-
-      button.classList.add("wrong");
-
-    }
+    else if (index === selectedIndex) button.classList.add("wrong");
 
   });
 
@@ -1719,13 +1734,9 @@ function answerPlace(place, selectedIndex) {
 
 }
 
-/* --------------------------------
+/* START */
 
-   START
-
---------------------------------- */
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",() => {
 
   createCountryMap();
 

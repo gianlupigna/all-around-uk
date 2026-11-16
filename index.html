@@ -139,7 +139,7 @@ p{color:var(--muted);line-height:1.7}
 
 .marker-dot.completed{border-color:#49d69b;opacity:.75}
 
-/* FLAG OPTIONS: NO COUNTRY NAMES */
+/* FLAG OPTIONS */
 
 .flag-answer{
 
@@ -149,29 +149,31 @@ justify-content:center;
 
 align-items:center;
 
-padding:13px;
+padding:16px;
 
-min-height:105px;
+min-height:125px;
 
 }
 
 .flag-art{
 
-width:145px;
+width:155px;
 
-height:88px;
+height:100px;
 
 max-width:100%;
 
 object-fit:contain;
 
-border:1px solid rgba(255,255,255,.25);
+border:1px solid rgba(255,255,255,.2);
 
-border-radius:4px;
+border-radius:5px;
 
 background:white;
 
-box-shadow:0 2px 9px rgba(0,0,0,.25);
+box-shadow:0 5px 18px rgba(0,0,0,.35);
+
+display:block;
 
 }
 
@@ -207,7 +209,7 @@ main{width:92%;padding-top:30px}
 
 .quiz-panel{padding:20px}
 
-.flag-art{width:125px;height:76px}
+.flag-art{width:135px;height:88px}
 
 }
 </style>
@@ -286,53 +288,33 @@ main{width:92%;padding-top:30px}
 
 /* ==========================================
 
-   FLAGS DRAWN DIRECTLY IN THE WEBSITE
+   OFFICIAL FLAG IMAGES
 
    ========================================== */
 
-const flagSVG={
+const flagImages={
 
-England:`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
-<rect width="600" height="360" fill="#fff"/>
-<rect x="240" width="120" height="360" fill="#cf142b"/>
-<rect y="120" width="600" height="120" fill="#cf142b"/>
-</svg>`,
+England:
 
-Scotland:`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
-<rect width="600" height="360" fill="#0065bd"/>
-<path d="M0 0 L75 0 L600 285 L600 360 L525 360 L0 75 Z" fill="#fff"/>
-<path d="M600 0 L525 0 L0 285 L0 360 L75 360 L600 75 Z" fill="#fff"/>
-</svg>`,
+"https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_England.svg",
 
-Wales:`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
-<rect width="600" height="180" fill="#fff"/>
-<rect y="180" width="600" height="180" fill="#00a650"/>
-<path d="M280 325 L260 290 L220 300 L240 270 L190 250 L240 245 L220 210 L270 225 L290 180 L310 220 L350 195 L340 240 L390 225 L365 260 L410 280 L350 285 L330 330 Z" fill="#d80027"/>
-<path d="M300 185 L320 130 L340 150 L335 105 L370 125 L355 85 L395 105 L380 150 L410 165 L370 185 L350 220 Z" fill="#d80027"/>
-<path d="M280 185 L260 140 L230 155 L245 110 L215 115 L240 85 L275 115 L295 155 Z" fill="#d80027"/>
-</svg>`,
+Scotland:
 
-NorthernIreland:`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
-<rect width="600" height="360" fill="#fff"/>
-<rect y="135" width="600" height="90" fill="#cf142b"/>
-<rect x="255" width="90" height="360" fill="#cf142b"/>
-<polygon points="300,95 315,120 345,120 323,140 332,168 300,151 268,168 277,140 255,120 285,120" fill="#cf142b"/>
-<circle cx="300" cy="180" r="49" fill="#fff" stroke="#cf142b" stroke-width="8"/>
-<path d="M300 205 C280 195 277 180 282 165 C286 153 295 155 300 169 C305 155 314 153 318 165 C323 180 320 195 300 205 Z" fill="#cf142b"/>
-<path d="M300 167 L300 205 M286 181 L314 181" stroke="#fff" stroke-width="5" fill="none"/>
-<path d="M280 85 L320 85 L310 68 L290 68 Z" fill="#d4a62a"/>
-<path d="M285 68 L290 48 L300 60 L310 48 L315 68 Z" fill="#d4a62a"/>
-</svg>`
+"https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Scotland.svg",
+
+Wales:
+
+"https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Wales.svg",
+
+NorthernIreland:
+
+"https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Northern_Ireland_%281953%E2%80%931972%29.svg"
 
 };
 
 function flagImage(name){
 
-return "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(flagSVG[name]);
+return flagImages[name];
 
 }
 
@@ -1003,22 +985,6 @@ const completedQuestions=new Set();
 /* ==========================================
 
    RANDOM ANSWER POSITION SYSTEM
-
-   The system:
-
-   - Counts how often each position is used.
-
-   - Prefers the least-used positions.
-
-   - Avoids repeating the previous position
-
-     whenever possible.
-
-   - Randomly chooses between equally used
-
-     positions.
-
-   This applies to ALL quiz questions.
 
    ========================================== */
 

@@ -29,13 +29,17 @@
 
 body{background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
 
-header{padding:24px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(8,13,24,.95)}
+header{padding:24px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:rgba(8,13,24,.95);gap:15px}
 
 .logo{font-size:22px;font-weight:900;letter-spacing:2px}
 
 .logo span{color:var(--accent)}
 
-.score{background:var(--panel);border:1px solid var(--border);border-radius:30px;padding:10px 17px;font-weight:bold}
+.score{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:10px 17px;font-weight:bold;text-align:right;line-height:1.6}
+
+.score-main{white-space:nowrap}
+
+.rank-label{color:var(--accent);font-size:12px;display:block}
 
 main{width:min(1100px,90%);margin:0 auto;padding:45px 0 70px}
 
@@ -183,17 +187,167 @@ display:block;
 
 .flag-caption{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.5}
 
+/* LEVEL SYSTEM */
+
+.level-panel{
+
+background:var(--panel);
+
+border:1px solid var(--border);
+
+border-radius:14px;
+
+padding:22px;
+
+margin-top:25px;
+
+max-width:650px;
+
+}
+
+.level-top{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:15px;
+
+margin-bottom:12px;
+
+}
+
+.level-name{
+
+color:var(--accent);
+
+font-weight:bold;
+
+font-size:18px;
+
+}
+
+.level-points{
+
+color:var(--muted);
+
+font-size:13px;
+
+}
+
+.level-track{
+
+height:10px;
+
+background:var(--panel2);
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin:12px 0;
+
+}
+
+.level-fill{
+
+height:100%;
+
+width:0%;
+
+background:var(--accent);
+
+border-radius:20px;
+
+transition:width .4s;
+
+}
+
+.level-description{
+
+font-size:13px;
+
+margin-top:10px;
+
+}
+
+.level-achievements{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:10px;
+
+margin-top:18px;
+
+}
+
+.level-achievement{
+
+background:var(--panel2);
+
+border:1px solid var(--border);
+
+border-radius:9px;
+
+padding:12px 8px;
+
+text-align:center;
+
+}
+
+.level-achievement.unlocked{
+
+border-color:var(--accent);
+
+background:rgba(98,214,197,.1);
+
+}
+
+.level-achievement strong{
+
+display:block;
+
+font-size:12px;
+
+margin-bottom:5px;
+
+}
+
+.level-achievement span{
+
+font-size:11px;
+
+color:var(--muted);
+
+}
+
+.level-achievement.unlocked span{
+
+color:var(--accent);
+
+}
+
 .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#111a2b;color:white}
 
 .leaflet-popup-content{font-weight:bold}
 
-footer{text-align:center;color:#728097;padding:25px;border-top:1px solid var(--border);font-size:12px}
+footer{text-align:center;color:#728097;padding:25px;border-top:1px solid var(--border);font-size:12px;line-height:1.8}
+
+footer strong{color:var(--accent);display:block;margin-top:5px;font-size:13px}
 
 @media(max-width:700px){
 
 header{padding:18px 5%}
 
 .logo{font-size:17px}
+
+.score{padding:8px 11px;font-size:13px}
+
+.rank-label{font-size:11px}
 
 main{width:92%;padding-top:30px}
 
@@ -211,13 +365,22 @@ main{width:92%;padding-top:30px}
 
 .flag-art{width:135px;height:88px}
 
+.level-panel{padding:17px}
+
+.level-achievements{grid-template-columns:repeat(2,1fr)}
+
+.level-top{align-items:flex-start;flex-direction:column;gap:5px}
+
 }
 </style>
 </head>
 <body>
 <header>
 <div class="logo">ALL AROUND <span>UK.</span></div>
-<div class="score">⭐ <span id="score">0</span> points</div>
+<div class="score">
+<div class="score-main">⭐ <span id="score">0</span> points</div>
+<span class="rank-label" id="rankLabel">Beginner Explorer</span>
+</div>
 </header>
 <main>
 <section id="home" class="screen active">
@@ -227,10 +390,39 @@ main{width:92%;padding-top:30px}
 <p>Discover the United Kingdom, explore its four countries, visit famous places and test your knowledge with interactive quizzes.</p>
 <button class="button" onclick="showScreen('countries')">START EXPLORING →</button>
 </div>
+<div class="level-panel">
+<div class="eyebrow">Your adventure progress</div>
+<div class="level-top">
+<div class="level-name" id="homeRank">Beginner Explorer</div>
+<div class="level-points" id="homeRankPoints">0 / 180 points</div>
+</div>
+<div class="level-track">
+<div class="level-fill" id="homeRankFill"></div>
+</div>
+<p class="level-description" id="homeRankDescription">Start exploring the United Kingdom and earn points to unlock new titles!</p>
+<div class="level-achievements">
+<div class="level-achievement" id="achievement1">
+<strong>UK Explorer</strong>
+<span>180 points</span>
+</div>
+<div class="level-achievement" id="achievement2">
+<strong>UK Traveller</strong>
+<span>360 points</span>
+</div>
+<div class="level-achievement" id="achievement3">
+<strong>UK Expert</strong>
+<span>540 points</span>
+</div>
+<div class="level-achievement" id="achievement4">
+<strong>UK Master</strong>
+<span>720 points</span>
+</div>
+</div>
+</div>
 </section>
 <section id="countries" class="screen">
 <div class="section-heading">
-<div class="eyebrow">Step 01 — Choose your destination</div>
+<div class="eyebrow">Step 01 - Choose your destination</div>
 <h2>Explore the United Kingdom</h2>
 <p>The United Kingdom is made up of four countries. Select one on the map or use the buttons below to begin your journey.</p>
 </div>
@@ -246,7 +438,7 @@ main{width:92%;padding-top:30px}
 </div>
 </section>
 <section id="quiz" class="screen">
-<div class="eyebrow">Step 02 — Test your knowledge</div>
+<div class="eyebrow">Step 02 - Test your knowledge</div>
 <h2 id="countryTitle">Discover a country</h2>
 <p id="countryIntro"></p>
 <div class="quiz-panel">
@@ -260,13 +452,13 @@ main{width:92%;padding-top:30px}
 <button class="button secondary" onclick="showScreen('countries')">← Back to the map</button>
 </section>
 <section id="places" class="screen">
-<div class="eyebrow">Step 03 — Your exploration</div>
+<div class="eyebrow">Step 03 - Your exploration</div>
 <h2 id="placesTitle">Explore the country</h2>
 <p>Choose a place on the map. Discover interesting facts and answer two questions at each destination. You can visit the places in any order.</p>
 <div class="stats">
 <div class="stat">Places completed: <strong id="discovered">0 / 8</strong></div>
 <div class="stat">Questions answered: <strong id="questionsDone">0 / 16</strong></div>
-<div class="stat">Country: <strong id="currentCountry">—</strong></div>
+<div class="stat">Country: <strong id="currentCountry">-</strong></div>
 </div>
 <div class="map-panel">
 <div id="placesMap"></div>
@@ -282,7 +474,11 @@ main{width:92%;padding-top:30px}
 <button class="button secondary" onclick="showScreen('countries')">← Choose another country</button>
 </section>
 </main>
-<footer>ALL AROUND UK — Explore the United Kingdom</footer>
+<footer>
+
+ALL AROUND UK - Explore the United Kingdom
+<strong>Realizzato dalla classe 3BLSA</strong>
+</footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 
@@ -982,6 +1178,8 @@ const completedPlaces=new Set();
 
 const completedQuestions=new Set();
 
+const completedCountryQuestions=new Set();
+
 /* ==========================================
 
    RANDOM ANSWER POSITION SYSTEM
@@ -1110,13 +1308,113 @@ return placeKey(place)+":"+index;
 
 }
 
+/* ==========================================
+
+   LEVEL AND SCORE SYSTEM
+
+   ========================================== */
+
+const levels=[
+
+{points:0,name:"Beginner Explorer"},
+
+{points:180,name:"UK Explorer"},
+
+{points:360,name:"UK Traveller"},
+
+{points:540,name:"UK Expert"},
+
+{points:720,name:"UK Master"}
+
+];
+
+function getCurrentLevel(){
+
+let current=levels[0];
+
+for(const level of levels){
+
+if(score>=level.points)current=level;
+
+}
+
+return current;
+
+}
+
+function updateRank(){
+
+const current=getCurrentLevel();
+
+const next=levels.find(level=>level.points>score);
+
+document.getElementById("rankLabel").textContent=current.name;
+
+document.getElementById("homeRank").textContent=current.name;
+
+const homePoints=document.getElementById("homeRankPoints");
+
+const homeFill=document.getElementById("homeRankFill");
+
+const homeDescription=document.getElementById("homeRankDescription");
+
+if(next){
+
+const previous=current.points;
+
+const progress=score>=next.points?100:
+
+((score-previous)/(next.points-previous))*100;
+
+homePoints.textContent=score+" / "+next.points+" points";
+
+homeFill.style.width=progress+"%";
+
+homeDescription.textContent=
+
+"You need "+(next.points-score)+" more points to unlock "+next.name+"!";
+
+}else{
+
+homePoints.textContent="720 / 720 points";
+
+homeFill.style.width="100%";
+
+homeDescription.textContent=
+
+"Congratulations! You have reached the highest level: UK Master!";
+
+}
+
+for(let i=1;i<=4;i++){
+
+const achievement=document.getElementById("achievement"+i);
+
+const required=levels[i].points;
+
+achievement.classList.toggle("unlocked",score>=required);
+
+}
+
+}
+
 function updateScore(points){
 
 score+=points;
 
 document.getElementById("score").textContent=score;
 
+updateRank();
+
 }
+
+updateRank();
+
+/* ==========================================
+
+   SCREEN NAVIGATION
+
+   ========================================== */
 
 function showScreen(id){
 
@@ -1414,13 +1712,25 @@ else if(index===selectedIndex)button.classList.add("wrong");
 
 const feedback=document.getElementById("countryFeedback");
 
+const key=selectedCountry+":"+countryQuestionIndex;
+
 if(selectedIndex===correctIndex){
+
+if(!completedCountryQuestions.has(key)){
+
+completedCountryQuestions.add(key);
+
+updateScore(10);
 
 feedback.textContent="Correct! You earned 10 points.";
 
-feedback.className="feedback good";
+}else{
 
-updateScore(10);
+feedback.textContent="Correct! You have already earned points for this question.";
+
+}
+
+feedback.className="feedback good";
 
 }else{
 

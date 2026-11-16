@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALL AROUND UK</title>
+<meta name="description" content="Explore. Discover. Learn. An interactive journey through the United Kingdom.">
+<style>
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #080d16;
+
+            color: #f5f7fb;
+
+            min-height: 100vh;
+
+        }
+
+        header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 25px 7%;
+
+            border-bottom: 1px solid #202b3b;
+
+        }
+
+        .logo {
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+        }
+
+        .logo span {
+
+            color: #55b8f5;
+
+        }
+
+        .tag {
+
+            color: #9aa9bd;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+        }
+
+        main {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 100px 25px;
+
+            text-align: center;
+
+        }
+
+        .eyebrow {
+
+            color: #55b8f5;
+
+            letter-spacing: 4px;
+
+            font-size: 12px;
+
+            margin-bottom: 25px;
+
+        }
+
+        h1 {
+
+            font-size: clamp(48px, 9vw, 90px);
+
+            letter-spacing: -4px;
+
+            line-height: 1;
+
+        }
+
+        h1 span {
+
+            color: #55b8f5;
+
+        }
+
+        .subtitle {
+
+            color: #aab6c8;
+
+            font-size: 17px;
+
+            margin-top: 25px;
+
+        }
+
+        .description {
+
+            color: #8795a9;
+
+            max-width: 550px;
+
+            margin: 18px auto 35px;
+
+            line-height: 1.7;
+
+        }
+
+        button {
+
+            background: #55b8f5;
+
+            color: #07111d;
+
+            border: none;
+
+            padding: 16px 32px;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+        button:hover {
+
+            background: #8bd1ff;
+
+            transform: translateY(-2px);
+
+        }
+
+        .countries {
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-top: 65px;
+
+        }
+
+        .country {
+
+            background: #111b2a;
+
+            border: 1px solid #26364b;
+
+            border-radius: 12px;
+
+            padding: 24px 10px;
+
+        }
+
+        .country .flag {
+
+            font-size: 35px;
+
+        }
+
+        .country h2 {
+
+            font-size: 16px;
+
+            margin-top: 12px;
+
+        }
+
+        .country p {
+
+            color: #8494aa;
+
+            font-size: 12px;
+
+            margin-top: 8px;
+
+        }
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            color: #65748a;
+
+            font-size: 12px;
+
+            border-top: 1px solid #202b3b;
+
+        }
+
+        @media (max-width: 650px) {
+
+            .countries {
+
+                grid-template-columns: repeat(2, 1fr);
+
+            }
+
+            main {
+
+                padding-top: 70px;
+
+            }
+
+            .tag {
+
+                display: none;
+
+            }
+
+        }
+</style>
+</head>
+<body>
+<header>
+<div class="logo">ALL AROUND <span>UK.</span></div>
+<div class="tag">EXPLORE THE UNITED KINGDOM</div>
+</header>
+<main>
+<div class="eyebrow">A JOURNEY THROUGH BRITAIN</div>
+<h1>ALL AROUND<br><span>UK.</span></h1>
+<p class="subtitle">Explore. Discover. Learn.</p>
+<p class="description">
+
+            Discover the United Kingdom through an interactive journey.
+
+            Explore its countries, visit famous places and test your knowledge.
+</p>
+<button onclick="startExploring()">START EXPLORING →</button>
+<section class="countries">
+<div class="country">
+<div class="flag">🏴</div>
+<h2>Scotland</h2>
+<p>Discover the Highlands</p>
+</div>
+<div class="country">
+<div class="flag">🏴</div>
+<h2>Wales</h2>
+<p>Explore the castles</p>
+</div>
+<div class="country">
+<div class="flag">🇬🇧</div>
+<h2>England</h2>
+<p>Discover its history</p>
+</div>
+<div class="country">
+<div class="flag">🇬🇧</div>
+<h2>Northern Ireland</h2>
+<p>Explore its landscapes</p>
+</div>
+</section>
+</main>
+<footer>
+
+        ALL AROUND UK · EXPLORE. DISCOVER. LEARN.
+</footer>
+<script>
+
+        function startExploring() {
+
+            alert("Welcome to ALL AROUND UK! The exploration map is coming soon.");
+
+        }
+</script>
+</body>
+</html>
+ 

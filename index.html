@@ -4,298 +4,1028 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ALL AROUND UK</title>
-<meta name="description" content="Explore. Discover. Learn. An interactive journey through the United Kingdom.">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 
-        * {
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-            margin: 0;
+body {
 
-            padding: 0;
+    background: #080d16;
 
-            box-sizing: border-box;
+    color: #f5f7fb;
 
-        }
+    font-family: Arial, sans-serif;
 
-        body {
+}
 
-            font-family: Arial, sans-serif;
+header {
 
-            background: #080d16;
+    padding: 22px 6%;
 
-            color: #f5f7fb;
+    border-bottom: 1px solid #253246;
 
-            min-height: 100vh;
+    display: flex;
 
-        }
+    justify-content: space-between;
 
-        header {
+    align-items: center;
 
-            display: flex;
+}
 
-            justify-content: space-between;
+.logo {
 
-            align-items: center;
+    font-size: 21px;
 
-            padding: 25px 7%;
+    font-weight: 800;
 
-            border-bottom: 1px solid #202b3b;
+    letter-spacing: 2px;
 
-        }
+}
 
-        .logo {
+.logo span { color: #55b8f5; }
 
-            font-size: 22px;
+header small {
 
-            font-weight: 800;
+    color: #91a0b5;
 
-            letter-spacing: 2px;
+    letter-spacing: 2px;
 
-        }
+}
 
-        .logo span {
+main {
 
-            color: #55b8f5;
+    max-width: 1150px;
 
-        }
+    margin: auto;
 
-        .tag {
+    padding: 65px 22px;
 
-            color: #9aa9bd;
+}
 
-            font-size: 13px;
+.screen { display: none; }
 
-            letter-spacing: 2px;
+.screen.active { display: block; }
 
-        }
+.hero {
 
-        main {
+    text-align: center;
 
-            max-width: 1100px;
+    padding: 45px 0;
 
-            margin: auto;
+}
 
-            padding: 100px 25px;
+.eyebrow {
 
-            text-align: center;
+    color: #55b8f5;
 
-        }
+    letter-spacing: 4px;
 
-        .eyebrow {
+    font-size: 12px;
 
-            color: #55b8f5;
+    margin-bottom: 22px;
 
-            letter-spacing: 4px;
+}
 
-            font-size: 12px;
+h1 {
 
-            margin-bottom: 25px;
+    font-size: clamp(48px, 9vw, 85px);
 
-        }
+    letter-spacing: -4px;
 
-        h1 {
+}
 
-            font-size: clamp(48px, 9vw, 90px);
+h1 span { color: #55b8f5; }
 
-            letter-spacing: -4px;
+.subtitle {
 
-            line-height: 1;
+    color: #aab6c8;
 
-        }
+    margin: 20px 0;
 
-        h1 span {
+    font-size: 18px;
 
-            color: #55b8f5;
+}
 
-        }
+.description {
 
-        .subtitle {
+    color: #8795a9;
 
-            color: #aab6c8;
+    max-width: 570px;
 
-            font-size: 17px;
+    line-height: 1.7;
 
-            margin-top: 25px;
+    margin: 0 auto 30px;
 
-        }
+}
 
-        .description {
+button {
 
-            color: #8795a9;
+    border: 0;
 
-            max-width: 550px;
+    background: #55b8f5;
 
-            margin: 18px auto 35px;
+    color: #07111d;
 
-            line-height: 1.7;
+    padding: 14px 24px;
 
-        }
+    border-radius: 7px;
 
-        button {
+    font-weight: bold;
 
-            background: #55b8f5;
+    cursor: pointer;
 
-            color: #07111d;
+    transition: .2s;
 
-            border: none;
+}
 
-            padding: 16px 32px;
+button:hover {
 
-            border-radius: 8px;
+    background: #91d4ff;
 
-            font-size: 15px;
+    transform: translateY(-2px);
 
-            font-weight: bold;
+}
 
-            cursor: pointer;
+.secondary {
 
-            transition: 0.2s;
+    background: #1a293c;
 
-        }
+    color: white;
 
-        button:hover {
+    border: 1px solid #34465e;
 
-            background: #8bd1ff;
+}
 
-            transform: translateY(-2px);
+.section-title {
 
-        }
+    font-size: 30px;
 
-        .countries {
+    margin-bottom: 12px;
 
-            display: grid;
+}
 
-            grid-template-columns: repeat(4, 1fr);
+.muted {
 
-            gap: 15px;
+    color: #93a1b5;
 
-            margin-top: 65px;
+    line-height: 1.6;
 
-        }
+}
 
-        .country {
+.panel {
 
-            background: #111b2a;
+    background: #111b2a;
 
-            border: 1px solid #26364b;
+    border: 1px solid #29394e;
 
-            border-radius: 12px;
+    border-radius: 12px;
 
-            padding: 24px 10px;
+    padding: 22px;
 
-        }
+    margin-top: 25px;
 
-        .country .flag {
+}
 
-            font-size: 35px;
+#ukMap, #placesMap {
 
-        }
+    width: 100%;
 
-        .country h2 {
+    height: 490px;
 
-            font-size: 16px;
+    border-radius: 9px;
 
-            margin-top: 12px;
+    overflow: hidden;
 
-        }
+    background: #142235;
 
-        .country p {
+    margin-top: 20px;
 
-            color: #8494aa;
+}
 
-            font-size: 12px;
+.map-hint {
 
-            margin-top: 8px;
+    color: #91a0b5;
 
-        }
+    font-size: 13px;
 
-        footer {
+    margin-top: 12px;
 
-            text-align: center;
+}
 
-            padding: 25px;
+.country-buttons {
 
-            color: #65748a;
+    display: grid;
 
-            font-size: 12px;
+    grid-template-columns: repeat(4, 1fr);
 
-            border-top: 1px solid #202b3b;
+    gap: 10px;
 
-        }
+    margin-top: 18px;
 
-        @media (max-width: 650px) {
+}
 
-            .countries {
+.country-buttons button {
 
-                grid-template-columns: repeat(2, 1fr);
+    background: #172438;
 
-            }
+    border: 1px solid #34465e;
 
-            main {
+    color: white;
 
-                padding-top: 70px;
+}
 
-            }
+.country-buttons button:hover {
 
-            .tag {
+    border-color: #55b8f5;
 
-                display: none;
+}
 
-            }
+.question {
 
-        }
+    font-size: 22px;
+
+    margin: 18px 0;
+
+    line-height: 1.4;
+
+}
+
+.answers {
+
+    display: grid;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+}
+
+.answers button {
+
+    text-align: left;
+
+    background: #1a293c;
+
+    color: white;
+
+    border: 1px solid #34465e;
+
+}
+
+.answers button:hover {
+
+    border-color: #55b8f5;
+
+}
+
+.feedback {
+
+    margin-top: 18px;
+
+    line-height: 1.6;
+
+    color: #a9d9ff;
+
+}
+
+.place-card {
+
+    background: #111b2a;
+
+    border: 1px solid #29394e;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    margin-top: 20px;
+
+}
+
+.place-card h3 { margin-bottom: 10px; }
+
+footer {
+
+    text-align: center;
+
+    padding: 25px;
+
+    color: #65748a;
+
+    border-top: 1px solid #202b3b;
+
+    font-size: 12px;
+
+}
+
+.leaflet-popup-content-wrapper,
+
+.leaflet-popup-tip {
+
+    background: #111b2a;
+
+    color: white;
+
+}
+
+@media(max-width:700px) {
+
+    .country-buttons { grid-template-columns: repeat(2, 1fr); }
+
+    header small { display: none; }
+
+    #ukMap, #placesMap { height: 390px; }
+
+}
 </style>
 </head>
 <body>
 <header>
 <div class="logo">ALL AROUND <span>UK.</span></div>
-<div class="tag">EXPLORE THE UNITED KINGDOM</div>
+<small>EXPLORE THE UNITED KINGDOM</small>
 </header>
 <main>
+<section id="home" class="screen active">
+<div class="hero">
 <div class="eyebrow">A JOURNEY THROUGH BRITAIN</div>
 <h1>ALL AROUND<br><span>UK.</span></h1>
-<p class="subtitle">Explore. Discover. Learn.</p>
+<div class="subtitle">Explore. Discover. Learn.</div>
 <p class="description">
 
             Discover the United Kingdom through an interactive journey.
 
-            Explore its countries, visit famous places and test your knowledge.
+            Choose a country, explore famous places and test your knowledge.
 </p>
-<button onclick="startExploring()">START EXPLORING →</button>
-<section class="countries">
-<div class="country">
-<div class="flag">🏴</div>
-<h2>Scotland</h2>
-<p>Discover the Highlands</p>
-</div>
-<div class="country">
-<div class="flag">🏴</div>
-<h2>Wales</h2>
-<p>Explore the castles</p>
-</div>
-<div class="country">
-<div class="flag">🇬🇧</div>
-<h2>England</h2>
-<p>Discover its history</p>
-</div>
-<div class="country">
-<div class="flag">🇬🇧</div>
-<h2>Northern Ireland</h2>
-<p>Explore its landscapes</p>
+<button onclick="showScreen('countries')">
+
+            START EXPLORING →
+</button>
 </div>
 </section>
-</main>
-<footer>
+<section id="countries" class="screen">
+<div class="eyebrow">STEP 01 · CHOOSE YOUR DESTINATION</div>
+<h2 class="section-title">Explore the United Kingdom</h2>
+<p class="muted">Select one of the four countries directly on the map.</p>
+<div class="panel">
+<div id="ukMap"></div>
+<p class="map-hint">Click on a coloured country to select it.</p>
+<div class="country-buttons">
+<button onclick="selectCountry('England')">England</button>
+<button onclick="selectCountry('Scotland')">Scotland</button>
+<button onclick="selectCountry('Wales')">Wales</button>
+<button onclick="selectCountry('Northern Ireland')">Northern Ireland</button>
+</div>
+</div>
+</section>
+<section id="quiz" class="screen">
+<div class="eyebrow">STEP 02 · COUNTRY QUIZ</div>
+<h2 class="section-title" id="quizCountry">Country</h2>
+<div class="panel">
+<p class="muted">Before exploring, let's test your knowledge.</p>
+<div class="question" id="questionText"></div>
+<div class="answers" id="answerButtons"></div>
+<div class="feedback" id="feedback"></div>
+<button id="continueButton" style="display:none;margin-top:20px"
 
-        ALL AROUND UK · EXPLORE. DISCOVER. LEARN.
-</footer>
+            onclick="openPlaces()">
+
+            EXPLORE THIS COUNTRY →
+</button>
+</div>
+</section>
+<section id="places" class="screen">
+<div class="eyebrow">STEP 03 · FREE EXPLORATION</div>
+<h2 class="section-title" id="placesTitle">Discover the places</h2>
+<p class="muted">
+
+        Choose any marker on the map. Discover a place and answer its question.
+</p>
+<div class="panel">
+<div id="placesMap"></div>
+<p class="map-hint">Select a marker to discover a place.</p>
+</div>
+<div class="place-card" id="placeInfo">
+<h3>Welcome explorer!</h3>
+<p class="muted">Choose a location on the map to begin.</p>
+</div>
+<p class="map-hint" id="scoreText">Score: 0 points</p>
+<button class="secondary" onclick="showScreen('countries')" style="margin-top:20px">
+
+        ← BACK TO COUNTRY MAP
+</button>
+</section>
+</main>
+<footer>ALL AROUND UK · EXPLORE. DISCOVER. LEARN.</footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 
-        function startExploring() {
+let ukMap;
 
-            alert("Welcome to ALL AROUND UK! The exploration map is coming soon.");
+let placesMap;
+
+let countryLayer;
+
+let selectedCountry = "";
+
+let score = 0;
+
+let answeredPlaces = new Set();
+
+const countryQuestions = {
+
+    "England": {
+
+        question: "What is the capital city of England?",
+
+        answers: ["Manchester", "London", "Liverpool"],
+
+        correct: 1
+
+    },
+
+    "Scotland": {
+
+        question: "What is the capital city of Scotland?",
+
+        answers: ["Glasgow", "Edinburgh", "Aberdeen"],
+
+        correct: 1
+
+    },
+
+    "Wales": {
+
+        question: "What is the capital city of Wales?",
+
+        answers: ["Swansea", "Newport", "Cardiff"],
+
+        correct: 2
+
+    },
+
+    "Northern Ireland": {
+
+        question: "What is the capital city of Northern Ireland?",
+
+        answers: ["Belfast", "Derry", "Armagh"],
+
+        correct: 0
+
+    }
+
+};
+
+const places = {
+
+    "England": [
+
+        {
+
+            name: "London",
+
+            lat: 51.5072, lon: -0.1276,
+
+            question: "Which famous clock tower is located in London?",
+
+            answers: ["Big Ben", "Eiffel Tower", "Leaning Tower"],
+
+            correct: 0,
+
+            fact: "London is the capital of England and is home to many famous landmarks."
+
+        },
+
+        {
+
+            name: "Stonehenge",
+
+            lat: 51.1789, lon: -1.8262,
+
+            question: "What is Stonehenge famous for?",
+
+            answers: ["Ancient stone circle", "Medieval castle", "Roman theatre"],
+
+            correct: 0,
+
+            fact: "Stonehenge is a prehistoric monument in Wiltshire."
+
+        },
+
+        {
+
+            name: "Oxford",
+
+            lat: 51.7520, lon: -1.2577,
+
+            question: "What is Oxford especially famous for?",
+
+            answers: ["Its university", "Its beaches", "Its volcano"],
+
+            correct: 0,
+
+            fact: "The University of Oxford is one of the oldest universities in the world."
+
+        },
+
+        {
+
+            name: "Liverpool",
+
+            lat: 53.4084, lon: -2.9916,
+
+            question: "Which famous band came from Liverpool?",
+
+            answers: ["Queen", "The Beatles", "ABBA"],
+
+            correct: 1,
+
+            fact: "Liverpool is the birthplace of The Beatles."
 
         }
+
+    ],
+
+    "Scotland": [
+
+        {
+
+            name: "Edinburgh Castle",
+
+            lat: 55.9486, lon: -3.1999,
+
+            question: "On which hill does Edinburgh Castle stand?",
+
+            answers: ["Castle Rock", "Arthur's Seat", "Calton Hill"],
+
+            correct: 0,
+
+            fact: "Edinburgh Castle dominates the skyline of Scotland's capital."
+
+        },
+
+        {
+
+            name: "Loch Ness",
+
+            lat: 57.3229, lon: -4.4244,
+
+            question: "Which legendary creature is associated with Loch Ness?",
+
+            answers: ["Dragon", "Loch Ness Monster", "Unicorn"],
+
+            correct: 1,
+
+            fact: "Loch Ness is a large freshwater lake in the Scottish Highlands."
+
+        },
+
+        {
+
+            name: "Glasgow",
+
+            lat: 55.8642, lon: -4.2518,
+
+            question: "Glasgow is located in which country?",
+
+            answers: ["Wales", "England", "Scotland"],
+
+            correct: 2,
+
+            fact: "Glasgow is known for its architecture, museums and music."
+
+        },
+
+        {
+
+            name: "Isle of Skye",
+
+            lat: 57.2736, lon: -6.2155,
+
+            question: "The Isle of Skye is famous for its...",
+
+            answers: ["Mountain landscapes", "Desert", "Tropical forests"],
+
+            correct: 0,
+
+            fact: "The Isle of Skye is known for its dramatic landscapes."
+
+        }
+
+    ],
+
+    "Wales": [
+
+        {
+
+            name: "Cardiff",
+
+            lat: 51.4816, lon: -3.1791,
+
+            question: "What is Cardiff?",
+
+            answers: ["The capital of Wales", "The capital of Scotland", "A Scottish island"],
+
+            correct: 0,
+
+            fact: "Cardiff is the capital and largest city of Wales."
+
+        },
+
+        {
+
+            name: "Conwy Castle",
+
+            lat: 53.2807, lon: -3.8250,
+
+            question: "What type of building is Conwy Castle?",
+
+            answers: ["A modern stadium", "A medieval castle", "A university"],
+
+            correct: 1,
+
+            fact: "Conwy Castle is a medieval fortress in North Wales."
+
+        },
+
+        {
+
+            name: "Snowdonia",
+
+            lat: 53.0685, lon: -4.0763,
+
+            question: "What is Snowdonia famous for?",
+
+            answers: ["Mountains", "Deserts", "Volcanoes"],
+
+            correct: 0,
+
+            fact: "Eryri, also known as Snowdonia, is a mountainous national park."
+
+        }
+
+    ],
+
+    "Northern Ireland": [
+
+        {
+
+            name: "Belfast",
+
+            lat: 54.5973, lon: -5.9301,
+
+            question: "What is Belfast?",
+
+            answers: ["The capital of Northern Ireland", "The capital of Wales", "A Scottish town"],
+
+            correct: 0,
+
+            fact: "Belfast is the capital and largest city of Northern Ireland."
+
+        },
+
+        {
+
+            name: "Giant's Causeway",
+
+            lat: 55.2408, lon: -6.5116,
+
+            question: "What is the Giant's Causeway famous for?",
+
+            answers: ["Hexagonal basalt columns", "A medieval palace", "A large waterfall"],
+
+            correct: 0,
+
+            fact: "The Giant's Causeway is a coastal landscape formed by volcanic activity."
+
+        },
+
+        {
+
+            name: "Derry",
+
+            lat: 54.9970, lon: -7.3090,
+
+            question: "What is Derry especially known for?",
+
+            answers: ["Its historic city walls", "Its pyramids", "Its ski resorts"],
+
+            correct: 0,
+
+            fact: "Derry is famous for its historic city walls."
+
+        }
+
+    ]
+
+};
+
+function showScreen(id) {
+
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+
+    document.getElementById(id).classList.add("active");
+
+    if (id === "countries") {
+
+        setTimeout(() => {
+
+            if (!ukMap) createCountryMap();
+
+            else ukMap.invalidateSize();
+
+        }, 100);
+
+    }
+
+    if (id === "places") {
+
+        setTimeout(() => {
+
+            if (placesMap) placesMap.invalidateSize();
+
+        }, 100);
+
+    }
+
+    window.scrollTo(0, 0);
+
+}
+
+function createCountryMap() {
+
+    ukMap = L.map("ukMap", {
+
+        scrollWheelZoom: false
+
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+
+    }).addTo(ukMap);
+
+    const colors = {
+
+        "England": "#3689bd",
+
+        "Scotland": "#8b73d6",
+
+        "Wales": "#32a78d",
+
+        "Northern Ireland": "#d18a48"
+
+    };
+
+    fetch("https://static.geodataviewer.com/datasets/uk-countries.geojson")
+
+        .then(response => {
+
+            if (!response.ok) throw new Error("Map data unavailable");
+
+            return response.json();
+
+        })
+
+        .then(data => {
+
+            countryLayer = L.geoJSON(data, {
+
+                style: feature => {
+
+                    const name = feature.properties.shapeName;
+
+                    return {
+
+                        color: "#d9e8f5",
+
+                        weight: 2,
+
+                        fillColor: colors[name] || "#3689bd",
+
+                        fillOpacity: 0.65
+
+                    };
+
+                },
+
+                onEachFeature: (feature, layer) => {
+
+                    const name = feature.properties.shapeName;
+
+                    layer.bindTooltip(name, {sticky: true});
+
+                    layer.on("click", () => selectCountry(name));
+
+                }
+
+            }).addTo(ukMap);
+
+            ukMap.fitBounds(countryLayer.getBounds(), {padding: [20,20]});
+
+        })
+
+        .catch(() => {
+
+            document.getElementById("ukMap").innerHTML =
+
+                "The map could not be loaded. Please refresh the page.";
+
+        });
+
+}
+
+function selectCountry(name) {
+
+    if (!countryQuestions[name]) return;
+
+    selectedCountry = name;
+
+    const q = countryQuestions[name];
+
+    document.getElementById("quizCountry").textContent = name;
+
+    document.getElementById("questionText").textContent = q.question;
+
+    document.getElementById("feedback").textContent = "";
+
+    document.getElementById("continueButton").style.display = "none";
+
+    const box = document.getElementById("answerButtons");
+
+    box.innerHTML = "";
+
+    q.answers.forEach((answer, index) => {
+
+        const button = document.createElement("button");
+
+        button.textContent = answer;
+
+        button.onclick = () => answerCountry(index);
+
+        box.appendChild(button);
+
+    });
+
+    showScreen("quiz");
+
+}
+
+function answerCountry(index) {
+
+    const q = countryQuestions[selectedCountry];
+
+    const buttons = document.querySelectorAll("#answerButtons button");
+
+    buttons.forEach(button => button.disabled = true);
+
+    if (index === q.correct) {
+
+        score += 10;
+
+        document.getElementById("feedback").textContent =
+
+            "Correct! +10 points. Great job!";
+
+    } else {
+
+        document.getElementById("feedback").textContent =
+
+            "Not quite! The correct answer is " + q.answers[q.correct] + ".";
+
+    }
+
+    document.getElementById("continueButton").style.display = "inline-block";
+
+}
+
+function openPlaces() {
+
+    document.getElementById("placesTitle").textContent =
+
+        "Discover " + selectedCountry;
+
+    showScreen("places");
+
+    setTimeout(() => createPlacesMap(), 150);
+
+}
+
+function createPlacesMap() {
+
+    if (placesMap) {
+
+        placesMap.remove();
+
+        placesMap = null;
+
+    }
+
+    placesMap = L.map("placesMap");
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+
+    }).addTo(placesMap);
+
+    const locations = places[selectedCountry];
+
+    locations.forEach(place => {
+
+        const marker = L.marker([place.lat, place.lon]).addTo(placesMap);
+
+        marker.bindTooltip(place.name);
+
+        marker.on("click", () => showPlace(place));
+
+    });
+
+    const bounds = L.latLngBounds(
+
+        locations.map(p => [p.lat, p.lon])
+
+    );
+
+    placesMap.fitBounds(bounds, {padding: [40,40]});
+
+}
+
+function showPlace(place) {
+
+    const alreadyAnswered = answeredPlaces.has(place.name);
+
+    const info = document.getElementById("placeInfo");
+
+    info.innerHTML = `
+<h3>${place.name}</h3>
+<p class="muted">${place.fact}</p>
+<div class="question">${place.question}</div>
+<div class="answers" id="placeAnswers"></div>
+<div class="feedback" id="placeFeedback"></div>
+
+    `;
+
+    const answerBox = document.getElementById("placeAnswers");
+
+    if (alreadyAnswered) {
+
+        document.getElementById("placeFeedback").textContent =
+
+            "You have already discovered this place!";
+
+        return;
+
+    }
+
+    place.answers.forEach((answer, index) => {
+
+        const button = document.createElement("button");
+
+        button.textContent = answer;
+
+        button.onclick = () => {
+
+            if (answeredPlaces.has(place.name)) return;
+
+            answeredPlaces.add(place.name);
+
+            const correct = index === place.correct;
+
+            if (correct) {
+
+                score += 10;
+
+                document.getElementById("placeFeedback").textContent =
+
+                    "Correct! +10 points. " + place.fact;
+
+            } else {
+
+                document.getElementById("placeFeedback").textContent =
+
+                    "The correct answer is " +
+
+                    place.answers[place.correct] + ". " + place.fact;
+
+            }
+
+            answerBox.querySelectorAll("button").forEach(b => b.disabled = true);
+
+            document.getElementById("scoreText").textContent =
+
+                "Score: " + score + " points · Places discovered: " +
+
+                answeredPlaces.size;
+
+        };
+
+        answerBox.appendChild(button);
+
+    });
+
+}
 </script>
 </body>
 </html>
